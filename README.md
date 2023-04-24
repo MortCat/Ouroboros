@@ -1,2 +1,2 @@
-#Ouroboros
-#A variant of the Snake game
+# Ouroboros
+# A variant of the Snake game
