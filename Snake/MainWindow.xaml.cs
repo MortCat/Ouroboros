@@ -21,10 +21,12 @@ namespace Snake
     public partial class MainWindow : Window
     {
         private GameBoard gameBoard;
+
+
         public MainWindow()
         {
             InitializeComponent();
-
+            gameBoard = new GameBoard();
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)

@@ -9,12 +9,18 @@ namespace Snake
 {
     public class GameBoard
     {
-        private const int CELL_SIZE = 10; // 每格大小
-        private const int GAME_SPEED = 100; // 速度/毫秒
+        private readonly DispatcherTimer timer;
+        private const int CELL_SIZE = 10; // size of each snake cell
+        private const int GAME_WIDTH = 40; // number of cells in game width
+        private const int GAME_HEIGHT = 30; // number of cells in game height
+        private const int SNAKE_START_LENGTH = 3; // starting length of the snake
+        private const int INITIAL_DELAY_MS = 200; // initial delay in milliseconds between moves
+        private const int MIN_DELAY_MS = 50; // minimum delay in milliseconds between moves
+        private const int SCORE_INCREMENT = 1; // score increment when snake eats a food
 
 
 
-        public GameBoard(Canvas canvas, MainWindow mainWindow)
+        public GameBoard()
         {
 
         }
@@ -28,6 +34,7 @@ namespace Snake
         public void Start()
         {
             // Timer
+
 
         }
 
