@@ -32,6 +32,19 @@ namespace Snake
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             gameBoard.Start();
+            Rectangle snakeBody = new Rectangle
+            {
+                Width = 10,
+                Height = 10,
+                Fill = Brushes.Gold,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1
+            };
+            // Add object to canvas.
+            Canvas.Children.Add(snakeBody);
+            // Set Position
+            Canvas.SetLeft(snakeBody, 0);
+            Canvas.SetTop(snakeBody, 0);
         }
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
