@@ -5,6 +5,7 @@ You always run after your tail.
 
 # ARCHITECTURE
 
+
 SnakeGame/
 
     |- MainWindow.xaml
