@@ -4,6 +4,7 @@ A variant of the Snake game.
 You always run after your tail.
 
 # ARCHITECTURE
+
 SnakeGame/
     |- MainWindow.xaml
     |- MainWindow.xaml.cs
@@ -16,4 +17,4 @@ SnakeGame/
     |
     |- DataAccess/
     |   |- SaveData.cs
-	|   |- SaveData.json
+    |- SaveData.json
