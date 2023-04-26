@@ -56,6 +56,8 @@ namespace Snake
             //Snake Body
             gameBoard.Start();
 
+            //Canvas.Children.Add(food);
+
         }
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -66,5 +68,18 @@ namespace Snake
             Environment.Exit(0);
             Close();
         }
+        private void MainWindowKey(object sender, RoutedEventArgs e)
+        {
+            /*
+            switch ()
+            {
+                case Left:
+                case Right:
+                case Up:
+                case Down:
+            }
+            */
+        }
     }
 }
+
