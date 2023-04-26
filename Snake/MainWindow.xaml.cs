@@ -27,10 +27,33 @@ namespace Snake
         {
             InitializeComponent();
             gameBoard = new GameBoard();
-        }
 
+
+            //Position of the snake is initialized.
+            var rnd = new Random();
+            int snakeX = rnd.Next(0, Convert.ToInt32(Canvas.ActualWidth));
+            int snakeY = rnd.Next(0, Convert.ToInt32(Canvas.ActualWidth));
+
+            Rectangle snakeBody = new Rectangle
+            {
+                Width = 10,
+                Height = 10,
+                Fill = Brushes.Gold,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1
+            };
+            // Add object to canvas.
+            Canvas.Children.Add(snakeBody);
+            // Set Position
+            Canvas.SetLeft(snakeBody, snakeX);
+            Canvas.SetTop(snakeBody, snakeY);
+
+
+
+        }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            //Snake Body
             gameBoard.Start();
 
         }

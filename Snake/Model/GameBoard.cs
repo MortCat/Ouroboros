@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace Snake
 {
-    public class GameBoard
+    public class GameBoard:Window
     {
         private readonly DispatcherTimer timer;
         private const int CELL_SIZE = 10; // size of each snake cell
@@ -34,6 +34,7 @@ namespace Snake
         public void Start()
         {
             // Timer
+
 
 
         }
