@@ -8,6 +8,25 @@ using System.Windows.Threading;
 
 namespace Snake
 {
+    class Snake
+    {
+        public SnakeBody Head { get; set; }
+        public List<SnakeBody> Body { get; set; }
+        public Snake(Point startPosition)
+        {
+            Head = new SnakeBody(startPosition);
+            Body = new List<SnakeBody>();
+            Body.Add(Head);
+        }
+    }
+    class SnakeBody
+    {
+        public Point Position { get; set; }
+        public SnakeBody(Point Position)
+        {
+            this.Position = Position;
+        }
+    }
     public class GameBoard
     {
         public List<Point> Body { get; set; }
@@ -28,10 +47,9 @@ namespace Snake
         //Body
         //Length
         //Score
-        //hit event
-        //check Collision
+
         //food
-        //* Ouroboros Mechanism
+
         // Direction
 
 
