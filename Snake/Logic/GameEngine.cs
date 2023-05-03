@@ -9,10 +9,17 @@ using System.Windows.Shapes;
 
 namespace Snake
 {
+    /*
     class GameEngine
     {
-        //hit event
-        //check Collision
+        public void Observer()
+        {
+
+        }
+        // -hit event
+            // |- Eat: eat food
+                // |- Body += Body
+            // |- Hit: check Collision - Wall or Body
         //* Ouroboros Mechanism
         GameBoard GameObj = new GameBoard();
         private string CheckCollision()
@@ -25,10 +32,11 @@ namespace Snake
 
                 //fat snake
                 SnakeBody newBody = new SnakeBody(snake.Body.Last().Position);
-                snake.Body.Add(newSegment);
+                snake.Body.Add(newBody);
             }
 
         }
 
     }
+    */
 }

@@ -12,49 +12,54 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Snake
 {
     /// <summary>
     /// MainWindow.xaml 的互動邏輯
     /// </summary>
+
+    //Timer
+    //private readonly DispatcherTimer timer;
+    //Move
+    //Body
+    //Length
+    //Score
+    //food
+    // Direction
+    //Observer
     public partial class MainWindow : Window
     {
-        private GameBoard gameBoard;
+        private GameBoard gameBoard = new GameBoard();
+        public static Point MaximumBoundary;
+
+
 
 
         public MainWindow()
         {
             InitializeComponent();
-            gameBoard = new GameBoard();
 
+            /*
+            MaximumBoundary = new Point
+            (
+                (int)Canvas.ActualWidth,
+                (int)Canvas.ActualHeight
+            );
+            */
+     
+            gameBoard.Initialize(Canvas);
+        }
 
-            //Position of the snake is initialized.
-            var rnd = new Random();
-            int snakeX = rnd.Next(0, Convert.ToInt32(Canvas.ActualWidth));
-            int snakeY = rnd.Next(0, Convert.ToInt32(Canvas.ActualWidth));
-
-            Rectangle snakeBody = new Rectangle
-            {
-                Width = 10,
-                Height = 10,
-                Fill = Brushes.Gold,
-                Stroke = Brushes.Black,
-                StrokeThickness = 1
-            };
-            // Add object to canvas.
-            Canvas.Children.Add(snakeBody);
-            // Set Position
-            Canvas.SetLeft(snakeBody, snakeX);
-            Canvas.SetTop(snakeBody, snakeY);
-
-
+        public void Timer()
+        {
 
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             //Snake Body
-            gameBoard.Start();
+            gameBoard.Start(Canvas);
 
             //Canvas.Children.Add(food);
 
@@ -62,6 +67,12 @@ namespace Snake
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             gameBoard.Pause();
+            MaximumBoundary = new Point
+                (
+                    (int)Canvas.ActualWidth,
+                    (int)Canvas.ActualHeight
+                );
+            MessageBox.Show(Convert.ToString(MaximumBoundary.X) + "," + Convert.ToString(MaximumBoundary.Y));
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -82,4 +93,3 @@ namespace Snake
         }
     }
 }
-
