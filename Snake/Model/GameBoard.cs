@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -10,7 +11,7 @@ namespace Snake
 {
     class Physics
     {
-        GameBoard gameBoard = new GameBoard();
+        //GameBoard gameBoard = new GameBoard();
         //Inertia
         public static int InertiaX = 1;
         public static int InertiaY = 0;
@@ -36,48 +37,26 @@ namespace Snake
     class FatSnake
     {
         GameBoard gameBoard = new GameBoard();
-        public Stack<Point> SnakeCoordinate;
-        
-        //putlic void GetSnakePosition(out int x , out int y)
 
-        public static int InertiaX = 1;
-        public static int InertiaY = 0;
-        public static int speed = 10;
-        public void SetSnakeCoordinate()
-        {
-            
-        }
-        public Rectangle Body
-        {
-            get
-            {
-                return new Rectangle
-                {
-                    Width = 10,
-                    Height = 10,
-                    Fill = Brushes.Gold,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 1
-                };
-            }
-        }
 
-        public Rectangle Head
+        public Rectangle Body = new Rectangle
         {
-            get 
-            {
-                return new Rectangle
-                {
-                    Width = 10,
-                    Height = 10,
-                    Fill = Brushes.Black,
-                    Stroke = Brushes.Gold,
-                    StrokeThickness = 1
-                };
-                
-            }
-        }
+            Width = 10,
+            Height = 10,
+            Fill = Brushes.Gold,
+            Stroke = Brushes.Black,
+            StrokeThickness = 1
+        };
 
+
+        public Rectangle Head = new Rectangle
+        {
+            Width = 10,
+            Height = 10,
+            Fill = Brushes.Black,
+            Stroke = Brushes.Gold,
+            StrokeThickness = 1
+        };
 
         /*
         public FatSnake()
@@ -132,17 +111,17 @@ namespace Snake
         public SnakeBody(Point Position)
         {
             this.Position = Position;
+            
         }
     }
 
     class Food
     {
-        Rectangle food = new Rectangle
+        Rectangle apple = new Rectangle
         {
             Width = 10,
             Height = 10,
             Fill = Brushes.Red,
-            //Stroke = Brushes.Black,
             StrokeThickness = 1
         };
     }
@@ -150,8 +129,50 @@ namespace Snake
 
     class GameBoard
     {
-        
-        
+        private Stack<Point> SnakeCoordinate = new Stack<Point>();
+
+
+        public void SetSnakeCoordinate(Point coordinate)
+        {
+            this.SnakeCoordinate.Push(coordinate);
+            //MessageBox.Show(Convert.ToString(SnakeCoordinate.Peek()));
+        }
+        public Point GetSnakeCoordinate()
+        {
+            //MessageBox.Show(Convert.ToString(SnakeCoordinate.Peek()));
+            var x = SnakeCoordinate.Peek().X;
+            var y = SnakeCoordinate.Peek().Y;
+
+
+            return new Point(x,y);
+        }
+
+
+
+        //putlic void GetSnakePosition(out int x , out int y)
+
+        public static int InertiaX = 1;
+        public static int InertiaY = 0;
+        public static int speed = 10;
+
+        public void SetInertia(int x, int y)
+        {
+            InertiaX = x;
+            InertiaY = y;
+        }
+
+
+
+
+        private readonly Rectangle apple = new Rectangle
+        {
+            Width = 10,
+            Height = 10,
+            Fill = Brushes.Red,
+            //Stroke = Brushes.Black,
+            StrokeThickness = 1
+        };
+
 
         /*
         private const int CELL_SIZE = 10; // size of each snake cell
@@ -169,9 +190,6 @@ namespace Snake
             X = rnd.Next(0, Convert.ToInt32(mainWindow.Canvas.ActualWidth));
             Y = rnd.Next(0, Convert.ToInt32(mainWindow.Canvas.ActualHeight));
         }
-
-
-
 
 
         public GameBoard()
@@ -194,34 +212,52 @@ namespace Snake
 
         public void Start(Canvas canvas)
         {
+            /*
             FatSnake fatSnake = new FatSnake();
-            // Timer
             GetRNDCoordinate(out int x, out int y);
-            //MessageBox.Show($"{x},{y}");
+
+            Canvas.SetRight(fatSnake.Body, x);
+            Canvas.SetTop(fatSnake.Body, y);
+            canvas.Children.Add(fatSnake.Body);
+
+            
+            Canvas.SetRight(apple,x-100);
+            Canvas.SetTop(apple,y);
+            canvas.Children.Add(apple);
 
 
-            Rectangle snakeBody = new Rectangle
-            {
-                Width = 10,
-                Height = 10,
-                Fill = Brushes.Gold,
-                Stroke = Brushes.Black,
-                StrokeThickness = 1
-            };
-            // Add object to canvas.
+            SetSnakeCoordinate(new Point(x, y));
+            */
 
-            // Set Position
-            Canvas.SetRight(snakeBody, x);
-            Canvas.SetTop(snakeBody, y);
-            canvas.Children.Add(snakeBody);
+            //int tx = (int)GetSnakeCoordinate().Peek().X;
+
+            //int ty = (int)GetSnakeCoordinate().Peek().Y;
+            Timer_Tick(canvas);
+
 
 
         }
 
-        public void Pause()
+        public void Pause(Canvas canvas)
         {
+            
             // Stop timer
-
+            
+            /*
+            DispatcherTimer time = new DispatcherTimer();
+            time.Interval = TimeSpan.FromMilliseconds(10); //FPS
+            int a = 10;
+            time.Tick += (s, e) =>
+            {
+                a++;
+                GetRNDCoordinate(out int x, out int y);
+                canvas.Children.Remove(fatSnake.Body);
+                Canvas.SetRight(fatSnake.Body, a);
+                Canvas.SetTop(fatSnake.Body, 50);
+                canvas.Children.Add(fatSnake.Body);
+            };
+            time.Start();
+            */
 
 
         }
@@ -232,7 +268,7 @@ namespace Snake
 
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(Canvas canvas)
         {
             // Snake Move
 
@@ -244,8 +280,38 @@ namespace Snake
 
             //Game Over
 
+            FatSnake fatSnake = new FatSnake();
+            // Stop timer
 
+            DispatcherTimer time = new DispatcherTimer();
+            time.Interval = TimeSpan.FromMilliseconds(speed); //FPS
+            int a = 10;
+            GetRNDCoordinate(out int x, out int y);
+            SetSnakeCoordinate(new Point(x, y));
+
+            time.Tick += (s, e) =>
+            {
+                a++;
+
+                x = (int)GetSnakeCoordinate().X;
+                y = (int)GetSnakeCoordinate().Y;
+                
+                canvas.Children.Remove(fatSnake.Body);
+                Canvas.SetRight(fatSnake.Body, x);
+                Canvas.SetTop(fatSnake.Body, y);
+                canvas.Children.Add(fatSnake.Body);
+
+
+
+                SetSnakeCoordinate(new Point(x + InertiaX, y + InertiaY));
+
+            };
+            time.Start();
+
+            
+      
         }
+
 
         private void Draw()
         {
