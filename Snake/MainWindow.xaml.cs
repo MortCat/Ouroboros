@@ -42,13 +42,13 @@ namespace Snake
             {
                 case Key.Left:
                     // 左方向鍵被按下了
-                    gameBoard.SetInertia(speed, 0);
+                    gameBoard.SetInertia(-speed, 0);
 
                     //MessageBox.Show("左");
                     break;
                 case Key.Right:
                     // 右方向鍵被按下了
-                    gameBoard.SetInertia(-speed, 0);
+                    gameBoard.SetInertia(speed, 0);
 
                     //MessageBox.Show("右");
                     break;
@@ -91,23 +91,27 @@ namespace Snake
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            MaximumBoundary = new Point
+            (
+                (int)Canvas.ActualWidth,
+                (int)Canvas.ActualHeight
+            );
             //Snake Body
             gameBoard.Start(Canvas);
             KeyDown += Window_KeyDown;
 
-            //Canvas.Children.Add(food);
+
+
 
         }
+
+
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             gameBoard.Pause(Canvas);
             KeyDown += Window_KeyDown;
             
-            MaximumBoundary = new Point
-                (
-                    (int)Canvas.ActualWidth,
-                    (int)Canvas.ActualHeight
-                );
+
             //MessageBox.Show(Convert.ToString(MaximumBoundary.X) + "," + Convert.ToString(MaximumBoundary.Y));
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
