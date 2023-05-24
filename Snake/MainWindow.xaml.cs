@@ -38,31 +38,36 @@ namespace Snake
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             int speed = 10;
+            var (inertiaX, inertiaY) = gameBoard.GetInertia();
+
             switch (e.Key)
             {
                 case Key.Left:
-                    // 左方向鍵被按下了
-                    gameBoard.SetInertia(-speed, 0);
-
-                    //MessageBox.Show("左");
+                    if(inertiaY != 0)
+                    {
+                        gameBoard.SetInertia(-speed, 0);
+                    }
                     break;
+
                 case Key.Right:
-                    // 右方向鍵被按下了
-                    gameBoard.SetInertia(speed, 0);
-
-                    //MessageBox.Show("右");
+                    if (inertiaY != 0)
+                    {
+                        gameBoard.SetInertia(speed, 0);
+                    }
                     break;
+
                 case Key.Up:
-                    // 上方向鍵被按下了
-                    gameBoard.SetInertia(0,-speed);
-
-                    //MessageBox.Show("上");
+                    if (inertiaX != 0)
+                    {
+                        gameBoard.SetInertia(0, -speed);
+                    }
                     break;
-                case Key.Down:
-                    // 下方向鍵被按下了
-                    gameBoard.SetInertia(0, speed);
 
-                    //MessageBox.Show("下");
+                case Key.Down:
+                    if (inertiaX != 0)
+                    {
+                        gameBoard.SetInertia(0, speed);
+                    }
                     break;
             }
         }
@@ -116,7 +121,7 @@ namespace Snake
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            gameBoard.Exit();
             Close();
         }
         private void MainWindowKey(object sender, RoutedEventArgs e)
